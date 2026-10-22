@@ -152,8 +152,12 @@ metapackages, and nginx in front of `php7.4-fpm`.
 - re-running `install` is a no-op
 - `uninstall` returned the server to `7.4.3-4ubuntu2.29`, and the site works again
 
-The tests for each backup source on its own, automatic rollback, tampered packages and
-wrong-OS refusal are still running. This section will be updated with their results.
+- backups: each source on its own (apt cache, Ondřej's repository, `dpkg-repack`) gave a
+  working `uninstall` back to `7.4.3-4ubuntu2.29`
+- automatic rollback: when verification fails after the upgrade, the script puts the old
+  packages back and the site keeps working
+- a tampered `.deb` is refused before anything is changed
+- the script refuses to run on anything other than Ubuntu 20.04
 
 Not covered: real systemd (the container used a stub `systemctl`).
 
